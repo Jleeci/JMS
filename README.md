@@ -39,12 +39,32 @@
 			消费者不能消费订阅之前就发送到主题中的消息
 ![JMS编码接口之间的关系.PNG](https://i.imgur.com/pxvCrvh.png)
 ##JMS编码接口
-	1. - ConnectionFactory用于创建连接到消息中间件的连接工厂
-	2. Connection代表了应用程序和消费服务器之间的通信链路
-	3. Destination指消息发布和接受的地点，包括队列或主题
-	4. Session 表示一个单线程的上下文，用于发送和接受消息
-	5. MessageConsumer由会话创建，用于接收发送到目标的消息
-	6. MessageProducer由会话撞见，用于发送消息到目标
-	7. Message是在消费者和生产者之间传送的对象，消息头，一组消息属性，一个消息体。
+1. ConnectionFactory用于创建连接到消息中间件的连接工厂
+2. Connection代表了应用程序和消费服务器之间的通信链路
+3. Destination指消息发布和接受的地点，包括队列或主题
+4. Session 表示一个单线程的上下文，用于发送和接受消息
+5. MessageConsumer由会话创建，用于接收发送到目标的消息
+6. MessageProducer由会话撞见，用于发送消息到目标
+7. Message是在消费者和生产者之间传送的对象，消息头，一组消息属性，一个消息体。
 #JMS代码演练
+
+#使用Spring集成JMS连接ActiveMQ
+	
+1. ConnectionFactory用于管理连接的连接工厂
+2. JmsTemplate用于发送和接受消息的模板类
+3. MessageListerner消息监听器
+
+###ConnectionFactory
+1. 一个Spring为我们提供的连接池
+2. JmsTemplate每次发消息都会重新创建连接，会话和productor
+3. Spring中提供了SingleConnectionFactory和CachingConnectionFactory
 		
+###JmsTemplate
+1. 是Spring提供的，只需向Spring容器内注册这个类就可以使用JmsTemplate方便的操作jms
+2. JmsTemplate类是线程安全的，可以在整个应用范围使用
+
+###MessageListerner
+
+
+- 实现一个onMessage方法，该方法指接收一个Message参数。
+
