@@ -68,3 +68,33 @@
 
 - 实现一个onMessage方法，该方法指接收一个Message参数。
 
+#ActiveMQ集群配置
+##为什么要对消息中间件集群
+1. 使用高可用，以排除单点故障引起的服务中断。
+2. 实现负载均衡，以提升效率为更多客户提供服务。
+
+###集群方式
+ 
+1. 客户端集群：让多个消费者消费同一个队列
+2. Broker clusters:多个Broker之间同步消息
+3. Master Slav:实现高可用
+
+####客户端配置：
+ActiveMQ失效转移（failover）
+   允许当其中一台消息服务器宕机时，客户端在传输层上重新连接到其他消息服务器。
+语法：failover:(uri,...uriN)?transportOptions
+####transportOptons参数说明
+- randomize默认为true，表示在URI列表中选择URI连接时是否采用随机策略
+-  initalReconnectDelay默认为10，单位毫秒，表示第一次尝试重连之间等待的时间
+-  maxReconnectDelay默认30000，单位毫秒，最长重连的时间间隔
+####Broker Cluster集群配置
+#####原理
+NetworkConnector(网络连接器)
+
+- 网络连机器主要用于配置ActiveMQ服务器与服务器之间的网络通讯方式，用于服务器透传消息
+- 网络连接器分为静态连接器和动态连接器
+静态连接器
+		<networkConnectors>
+			<networkConnector uri="static:(tcp://127.0.0.1:61617,tcp://127.0.0.1:61618)"/>
+		<networkConnectors>
+		

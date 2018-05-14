@@ -9,7 +9,9 @@
     <!--配置消息监听容器-->
     <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="connectionFactory" ref="connectionFactory"/>
-        <property name="destination" ref="queueDestination"/>
+        <!--<property name="destination" ref="queueDestination"/>-->
+        <property name="destination" ref="topicDestination"/>
         <property name="messageListener" ref="consumerMessageListener"/>
     </bean>
+
 </beans>

@@ -18,4 +18,8 @@
         <constructor-arg value="queue"/>
     </bean>
 
+    <bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="topic"/>
+</bean>
+
 </beans>

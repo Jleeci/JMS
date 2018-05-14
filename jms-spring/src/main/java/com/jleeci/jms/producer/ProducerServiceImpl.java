@@ -13,7 +13,8 @@ import javax.jms.*;
 public class ProducerServiceImpl implements ProducerService {
     @Autowired
     JmsTemplate jmsTemplate;
-    @Resource(name="queueDestination")
+    //@Resource(name="queueDestination")
+    @Resource(name="topicDestination")
     Destination destination;
     public void sendMessage(final String message) {
         //使用JmsTemplate发送消息
